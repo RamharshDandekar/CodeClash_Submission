@@ -6,11 +6,11 @@ from PIL import Image
 import io
 
 # -----------------------------------------------------------------------------
-# 1. PATH SETUP (Adapt to your Local Environment)
+# 1. PATH SETUP (Use Streamlit Secrets)
 # -----------------------------------------------------------------------------
 
-# **Replace with the actual path to your trained model!**
-trained_model_path = 'best.pt'
+# **trained_model_path = 'C:\\AI_Project\\HackByte_Dataset\\trained_model.pt' (No longer needed)**
+trained_model_path = st.secrets["MODEL_PATH"]
 
 # -----------------------------------------------------------------------------
 # 2. LOAD MODEL
@@ -42,7 +42,7 @@ uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png
 if uploaded_file is not None:
     # Read the image
     image = Image.open(uploaded_file)
-    st.image(image, caption="Uploaded Image", use_container_width=True) #Updated image
+    st.image(image, caption="Uploaded Image", use_container_width=True)
 
     # Predict Button
     if st.button("Detect Objects"):
@@ -67,7 +67,7 @@ if uploaded_file is not None:
 
             # Visualize Bounding Boxes
             annotated_image = results[0].plot()  #Visualize
-            st.image(annotated_image, caption="Detected Objects", use_container_width=True) #Updated image
+            st.image(annotated_image, caption="Detected Objects", use_container_width=True)
 
         else:
             st.write("Model not loaded. Check the file paths and try again.")
